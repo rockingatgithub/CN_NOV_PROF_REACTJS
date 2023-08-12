@@ -1,6 +1,7 @@
 import { useState } from "react"
 import Dashboard from "../Dashboard"
 import {useNavigate} from 'react-router-dom'
+import {GoogleLogin} from '@react-oauth/google'
 
 const UserForm = (props) => {
 
@@ -35,6 +36,21 @@ const UserForm = (props) => {
 
     }
 
+    const googleAuthHandler = async credentialResponse => {
+
+        const response = await fetch('http://localhost:8000/auth/google', {
+            method: 'POST',
+            body: JSON.stringify({ token: credentialResponse.credential }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+
+        const parsedResponse = await response.json()
+        console.log("The google response", parsedResponse)
+
+    }
+
     console.log("Userform props", props)
 
 
@@ -62,6 +78,13 @@ const UserForm = (props) => {
 
 
         </form>
+
+        <GoogleLogin
+        
+            onSuccess={  credentialResponse => { googleAuthHandler(credentialResponse) }  }
+            onError={ () => { console.log("Error occured in Google Login") } }
+
+        />
 
     </>
 
