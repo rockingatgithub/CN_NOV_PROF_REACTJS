@@ -47,7 +47,9 @@ const UserForm = (props) => {
         })
 
         const parsedResponse = await response.json()
-        console.log("The google response", parsedResponse)
+        // console.log("The google response", parsedResponse)
+        props.setUser(parsedResponse.data)
+        navigate('/dashboard')
 
     }
 
@@ -72,6 +74,15 @@ const UserForm = (props) => {
             <div>
                 <label htmlFor="password" > Password:- </label>
                 <input id="password" name="password" value={password} onChange={(event) => setPassword(event.target.value)} />
+            </div>
+
+            <div>
+                <label htmlFor="admin"> Signin as Admin </label>
+                <input type="radio" id="admin" value="admin" name="user-type" />
+
+                <label htmlFor="candidate"> Signin as Candidate </label>
+                <input type="radio" id="candidate" value="candidate" name="user-type" />
+
             </div>
 
             <button type="submit" > Submit </button>
