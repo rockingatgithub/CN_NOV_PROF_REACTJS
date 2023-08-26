@@ -1,0 +1,17 @@
+.userform {
+    width: 40%;
+    margin: auto;
+}
+
+.heading {
+    text-align: center;
+}
+
+#heading-new {
+    color: lightgray
+}
+
+.google-login {
+    display: flex;
+    justify-content: center;
+}

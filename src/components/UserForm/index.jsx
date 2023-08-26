@@ -2,6 +2,13 @@ import { useState } from "react"
 import Dashboard from "../Dashboard"
 import {useNavigate} from 'react-router-dom'
 import {GoogleLogin} from '@react-oauth/google'
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import style from './userform.module.css'
+
+const CANDIDATE_SIGNUP_URL = 'http://localhost:8000/student'
+const ADMIN_SIGNUP_URL = 'http://localhost:8000/admin'
+
 
 const UserForm = (props) => {
 
@@ -9,6 +16,7 @@ const UserForm = (props) => {
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [isAdmin, setIsAdmin] = useState(false)
 
     const navigate = useNavigate()
 
@@ -22,7 +30,8 @@ const UserForm = (props) => {
             password
         }
 
-        const response = await fetch('http://localhost:8000/student', {
+        const URL = isAdmin ? ADMIN_SIGNUP_URL : CANDIDATE_SIGNUP_URL
+        const response = await fetch(URL, {
             method: 'POST',
             body: JSON.stringify(userObj),
             headers: {
@@ -57,45 +66,38 @@ const UserForm = (props) => {
 
 
     return <>
-        <h1> {props.heading} </h1>
+        <h2 id={style['heading-new']} className={style.heading}> {props.heading} </h2>
 
-        <form onSubmit={submitHandler} >
+        <Form onSubmit={submitHandler} className={style.userform}>
 
-            {props.isSignUp && <div>
-                <label htmlFor="name" > Name:- </label>
-                <input id="name" name="name" value={name} onChange={(event) => setName(event.target.value)} />
-            </div>}
+            { props.isSignUp && <Form.Group className="mb-3" controlId="formBasicName">
+                <Form.Label>Name</Form.Label>
+                <Form.Control type="name" placeholder="Enter name" value={name} onChange={(event) => setName(event.target.value)} />
+            </Form.Group>}
 
-            <div>
-                <label htmlFor="email" > Email:- </label>
-                <input id="email" name="email" value={email} onChange={(event) => setEmail(event.target.value)} />
-            </div>
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Label>Email address</Form.Label>
+                <Form.Control type="email" placeholder="Enter email" value={email} onChange={(event) => setEmail(event.target.value)} />
+            </Form.Group>
 
-            <div>
-                <label htmlFor="password" > Password:- </label>
-                <input id="password" name="password" value={password} onChange={(event) => setPassword(event.target.value)} />
-            </div>
-
-            <div>
-                <label htmlFor="admin"> Signin as Admin </label>
-                <input type="radio" id="admin" value="admin" name="user-type" />
-
-                <label htmlFor="candidate"> Signin as Candidate </label>
-                <input type="radio" id="candidate" value="candidate" name="user-type" />
-
-            </div>
-
-            <button type="submit" > Submit </button>
-
-
-        </form>
-
-        <GoogleLogin
+            <Form.Group className="mb-3" controlId="formBasicPassword">
+                <Form.Label>Password</Form.Label>
+                <Form.Control type="password" placeholder="Password" value={password} onChange={(event) => setPassword(event.target.value)} />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicCheckbox">
+                <Form.Check type="checkbox" label="Admin Login/Signup" onChange={ event => setIsAdmin( prev => !prev ) }  />
+            </Form.Group>
+            <Button variant="primary" type="submit">
+                Submit
+            </Button>
+        </Form>
+        <div className={style['google-login']}>
+            <GoogleLogin
+                onSuccess={  credentialResponse => { googleAuthHandler(credentialResponse) }  }
+                onError={ () => { console.log("Error occured in Google Login") } }
+            />
+        </div>
         
-            onSuccess={  credentialResponse => { googleAuthHandler(credentialResponse) }  }
-            onError={ () => { console.log("Error occured in Google Login") } }
-
-        />
 
     </>
 
