@@ -2,6 +2,8 @@ import { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button'
 import style from './company.module.css'
+import { useDispatch, useSelector } from 'react-redux';
+import { decrementCounter, incrementCounter } from '../actions';
 const Company = (props) => {
 
     const [name, setName] = useState('')
@@ -9,6 +11,11 @@ const Company = (props) => {
     const [description, setDescription] = useState('')
     const [lastDate, setLastDate] = useState('')
     const [companyPackage, setCompanyPackage] = useState('')
+
+    const data = useSelector( state => state )
+    console.log("The state from store", data)
+
+    const dispatch = useDispatch()
 
     const submitHandler = async event => {
 
@@ -33,6 +40,14 @@ const Company = (props) => {
         const parsedResponse = await response.json()
         console.log("interview", parsedResponse)
 
+    }
+
+    const incrementHandler = () => {
+        dispatch(incrementCounter(10))
+    }
+
+    const decrementHandler = () => {
+        dispatch(decrementCounter(8))
     }
 
     return (<>
@@ -68,6 +83,16 @@ const Company = (props) => {
             <Button type='primary'> Create </Button>
 
         </Form>
+
+
+        <div>
+            <h3> Store Example </h3>
+
+            <Button onClick={incrementHandler} > Inc </Button>
+                <span> {data.counter} </span>
+            <Button onClick={decrementHandler} > Dec </Button> 
+
+        </div>
 
 
     </>)

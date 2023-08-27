@@ -17,7 +17,8 @@ const App = () => {
     { path: '/', title: 'Home' },
     { path: '/signup', title: 'Sign Up' },
     { path: '/signin', title: 'Sign In' }, 
-    { path: '/jobs', title: 'Jobs' }
+    { path: '/jobs', title: 'Jobs' },
+    { path: '/dashboard', title: 'Dashboard' }
   ]
 
   return <>
