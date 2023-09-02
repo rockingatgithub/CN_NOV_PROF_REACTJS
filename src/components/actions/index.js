@@ -42,3 +42,19 @@ export const incrementCounter = num => {
 export const decrementCounter = num => {
     return { type: 'DEC_COUNTER', data: num  }
 } 
+
+
+export const getInterviews = () => {
+
+    return async (dispatch, getState) => {
+
+        const interviews = await fetch('http://localhost:8000/interview/get')
+        const parsedResponse = await interviews.json()
+        if(interviews.status === 200) {
+             dispatch({type: 'GET_INTERVIEWS',  data: parsedResponse.data})
+        } else {
+            dispatch({ type: 'GET_INTERVIEWS', data: [] })
+        }
+    }
+
+}

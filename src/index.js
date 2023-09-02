@@ -5,11 +5,12 @@ import { GoogleOAuthProvider } from '@react-oauth/google';
 import './index.css';
 import App from './components/App';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {createStore} from 'redux'
+import {applyMiddleware, createStore} from 'redux'
 import {Provider} from 'react-redux'
+import thunk from 'redux-thunk'
 import main from './components/reducers';
 
-const store = createStore(main)
+const store = createStore(main, applyMiddleware(thunk))
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

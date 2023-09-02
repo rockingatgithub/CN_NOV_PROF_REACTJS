@@ -1,23 +1,15 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect } from "react"
 import Button from "react-bootstrap/esm/Button"
+import { useDispatch, useSelector } from "react-redux"
+import { getInterviews } from "../actions"
 
 const Jobs = props => {
 
-    const [interviews, setInterviews] = useState([])
-
-    const getInterviews = async () => {
-
-        const interviews = await fetch('http://localhost:8000/interview/get')
-        const parsedResponse = await interviews.json()
-        if(interviews.status === 200) {
-            return parsedResponse.data
-        }
-        return []
-    }
+    const interviews = useSelector(state => state.interviews)
+    const dispatch = useDispatch()
 
     useEffect (() => {
-        getInterviews().then( data => setInterviews(data)  )
-
+        dispatch( getInterviews() )
     }, [])
 
     return (
