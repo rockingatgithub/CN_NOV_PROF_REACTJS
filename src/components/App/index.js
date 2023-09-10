@@ -8,6 +8,7 @@ import Dashboard from "../Dashboard"
 import UserForm from "../UserForm"
 import './index.module.css'
 import Jobs from "../Jobs";
+import Chat from "../Chat";
 
 const App = () => {
 
@@ -18,7 +19,8 @@ const App = () => {
     { path: '/signup', title: 'Sign Up' },
     { path: '/signin', title: 'Sign In' }, 
     { path: '/jobs', title: 'Jobs' },
-    { path: '/dashboard', title: 'Dashboard' }
+    { path: '/dashboard', title: 'Dashboard' },
+    { path: '/chat', title: 'Chat' }
   ]
 
   return <>
@@ -38,6 +40,7 @@ const App = () => {
       <Route path="/signin" element={<UserForm heading="Signin Form" setUser={setUser} />} />
       <Route path='/dashboard' element={<Dashboard user={user} />} />
       <Route path='/jobs' element={<Jobs user={user} />} />
+      <Route path='/chat' element={<Chat/>} />
 
     </Routes>
 
