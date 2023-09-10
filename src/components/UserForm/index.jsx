@@ -6,7 +6,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import style from './userform.module.css'
 
-const CANDIDATE_SIGNUP_URL = 'http://localhost:8000/student'
+const CANDIDATE_SIGNUP_URL = 'https://fantastic-fatigues-eel.cyclic.cloud/student'
 const ADMIN_SIGNUP_URL = 'http://localhost:8000/admin'
 
 
