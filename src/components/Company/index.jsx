@@ -29,7 +29,7 @@ const Company = (props) => {
             package: companyPackage
         }
 
-        const response = await  fetch('http://localhost:8000/interview/create', {
+        const response = await  fetch('https://fantastic-fatigues-eel.cyclic.cloud/interview/create', {
             method: 'POST',
             body: JSON.stringify(interview),
             headers: {

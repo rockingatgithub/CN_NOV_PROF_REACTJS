@@ -7,7 +7,7 @@ import Form from 'react-bootstrap/Form';
 import style from './userform.module.css'
 
 const CANDIDATE_SIGNUP_URL = 'https://fantastic-fatigues-eel.cyclic.cloud/student'
-const ADMIN_SIGNUP_URL = 'http://localhost:8000/admin'
+const ADMIN_SIGNUP_URL = 'https://fantastic-fatigues-eel.cyclic.cloud/admin'
 
 
 const UserForm = (props) => {
@@ -47,7 +47,7 @@ const UserForm = (props) => {
 
     const googleAuthHandler = async credentialResponse => {
 
-        const response = await fetch('http://localhost:8000/auth/google', {
+        const response = await fetch('https://fantastic-fatigues-eel.cyclic.cloud/auth/google', {
             method: 'POST',
             body: JSON.stringify({ token: credentialResponse.credential }),
             headers: {

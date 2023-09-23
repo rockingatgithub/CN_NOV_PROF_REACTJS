@@ -1,5 +1,5 @@
-const CANDIDATE_SIGNUP_URL = 'http://localhost:8000/student'
-const ADMIN_SIGNUP_URL = 'http://localhost:8000/admin'
+const CANDIDATE_SIGNUP_URL = 'https://fantastic-fatigues-eel.cyclic.cloud/student'
+const ADMIN_SIGNUP_URL = 'https://fantastic-fatigues-eel.cyclic.cloud/admin'
 
 const submitHandler = async (event, navigate, userObj, isAdmin) => {
 
@@ -21,7 +21,7 @@ const submitHandler = async (event, navigate, userObj, isAdmin) => {
 
 const googleAuthHandler = async (credentialResponse, navigate) => {
 
-    const response = await fetch('http://localhost:8000/auth/google', {
+    const response = await fetch('https://fantastic-fatigues-eel.cyclic.cloud/auth/google', {
         method: 'POST',
         body: JSON.stringify({ token: credentialResponse.credential }),
         headers: {
@@ -48,7 +48,7 @@ export const getInterviews = () => {
 
     return async (dispatch, getState) => {
 
-        const interviews = await fetch('http://localhost:8000/interview/get')
+        const interviews = await fetch('https://fantastic-fatigues-eel.cyclic.cloud/interview/get')
         const parsedResponse = await interviews.json()
         if(interviews.status === 200) {
              dispatch({type: 'GET_INTERVIEWS',  data: parsedResponse.data})
