@@ -20,7 +20,7 @@ const App = () => {
     { path: '/signin', title: 'Sign In' }, 
     { path: '/jobs', title: 'Jobs' },
     { path: '/dashboard', title: 'Dashboard' },
-    { path: '/chat', title: 'Chat' }
+    // { path: '/chat', title: 'Chat' }
   ]
 
   return <>
@@ -40,7 +40,7 @@ const App = () => {
       <Route path="/signin" element={<UserForm heading="Signin Form" setUser={setUser} />} />
       <Route path='/dashboard' element={<Dashboard user={user} />} />
       <Route path='/jobs' element={<Jobs user={user} />} />
-      <Route path='/chat' element={<Chat/>} />
+      {/* <Route path='/chat' element={<Chat/>} /> */}
 
     </Routes>
 
